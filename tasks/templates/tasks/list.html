@@ -1,0 +1,36 @@
+{%extends 'tasks/main.html'%}
+{%block content%}
+	<div class="center-column">
+	<h2 class="mb-3 text-center">Todo list</h2>
+		{%for message in messages%}
+		<p class="alert alert-success"><strong>{{message}}</strong> is added to the list</p>
+		{%endfor%}
+	<div>
+		<form method="post" action="/" class="form">
+			{%csrf_token%}
+			{{form.title}}
+			<input type="submit" name="create Task" value="Add" class="btn btn-primary btn-sm">
+		</form>
+	</div>
+	<div class="todo-list">
+	{%for task in tasks%}
+		<div class="item-row ">
+			<div class="">
+			{%if task.complete == True%}
+				<strike> {{task}} </strike>
+			{%else%}
+				<span>{{task}}</span>
+			{%endif%}
+			<span class="edit">
+			<span class="pr-2">{{task.created.date}}</span>
+			<!-- <a href="{%url 'tasks:update_task' task.id%}" class="btn btn-sm btn-info mr-1 ml-1"> &#10002;</a> -->
+			<a href="{%url 'tasks:delete_task' task.id%}" class="btn btn-sm btn-danger mr-2"> &#10006;</a>
+			</span>
+			</div>
+			
+		</div>
+
+	{%endfor%}
+	</div>
+</div>
+{%endblock%}

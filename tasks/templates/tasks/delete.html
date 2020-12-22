@@ -1,0 +1,6 @@
+<p>Are you sure you want to delete <span style="color: red">{{task.title}}</span></p>
+<p><a href="{%url 'tasks:list'%}">Cancel</a></p>
+<form method="POST" action="">
+	{%csrf_token%}
+	<input type="submit" name="delete Task" value="Delete">
+</form>
